@@ -21,3 +21,13 @@ FilterAndReduce.subscribe(x => console.log(x));
 //map output:                        -1--2--3--NaN--6-->
 //Result from only filter would be the sequence of strings that are numbers printed to the console
 // Filter output:                    -1--2--3--4--6-->
+
+//event streamA is an observable of 3 and 4
+//event streamB takes those numbers and maps them into 10 * a
+//this is used so that we can times a with 10 whenever the value of a changes
+var streamA = Rx.Observable.of(3, 4);
+var streamB = streamA.map(a => 10 * a);
+
+//this subscribe will call the event streamB function with event streamA´s values
+//the output will be: --30-40------>
+streamB.subscribe(b => console.log(b));
